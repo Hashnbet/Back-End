@@ -1,9 +1,7 @@
 # Hash-n-Bet | Back-End
 
-## Hosted with HeroKu 
-
-
-## First Iteration of Hash-n-Bet Server
+---------------------------------------------------------------------------------------
+## Version 1.0.0 of Hash-n-Bet Server
 
 - Hash-n-bet will host users and their post exchanges and connect to outside third party payment services allowing users to exchange payment(optional) on the bases of a agreement (bet).
 
@@ -31,3 +29,12 @@
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [cross-env](https://www.npmjs.com/package/cross-env)
 - [bcrypt](https://www.npmjs.com/package/bcrypt)
+
+
+### Project Management 
+
+- [Trello Board]() Live look at the management needed to deliver a full API.
+
+### Author 
+
+- [Nicholas Gonzalez](https://github.com/NickGonzalez04)

@@ -1,7 +1,7 @@
 {
   "name": "hashnbet_be",
   "version": "1.0.0",
-  "description": "HashnBet Back-End",
+  "description": "HashnBet| Back-End",
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",
