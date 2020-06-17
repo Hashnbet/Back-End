@@ -11,15 +11,17 @@ exports.up = function(knex, Promise) {
     friend.string('username')
    })
    .createTable('friendships', bridge => {
-    bridge.increments('friendship_id').primary();
+    bridge.increments().primary();
     bridge.integer('user_id')
     .unsigned()
+    .notNullable()
     .references('id')
     .inTable('users')
     .onUpdate('CASCADE')
     .onDelete('CASCADE');
     bridge.integer('friend_id')
     .unsigned()
+    .notNullable()
     .references('id')
     .inTable('friends')
     .onUpdate('CASCADE')
