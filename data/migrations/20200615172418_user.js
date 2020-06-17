@@ -4,6 +4,12 @@ exports.up = function(knex, Promise) {
     user.increments();
     user.string('username', 128).unique().notNullable();
     user.string('password', 128).notNullable();
+    user
+    .string('name', 128)
+    .notNullable()
+    .unique();
+    user.string('bio', 255).notNullable();
+    
    });
 };
 
