@@ -4,34 +4,20 @@ exports.up = function(knex, Promise) {
     user.increments().primary();
     user.string('username', 128).unique().notNullable();
     user.string('password', 128).notNullable();
-    user.string('bio', 255).notNullable();
+    user.string('name', 255).notNullable();
+    user.integer('money_bankRoll');
+    user.integer('kudos_bankRoll');
+    user.string('bet_Type', 128).notNullable();
    })
-   .createTable('friends', friend => {
-    friend.increments().primary();
-    friend.string('username')
+   .createTable('following', tbl => {
+    tbl.increments().primary();
+    tbl.integer('user_id').references('id').inTable('users').onUpdate('CASCADE').onDelete('CASCADE');
+    tbl.integer('following_id').references('id').inTable('users').onUpdate('CASCADE').onDelete('CASCADE');
    })
-   .createTable('friendships', bridge => {
-    bridge.increments().primary();
-    bridge.integer('user_id')
-    .unsigned()
-    .notNullable()
-    .references('id')
-    .inTable('users')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE');
-    bridge.integer('friend_id')
-    .unsigned()
-    .notNullable()
-    .references('id')
-    .inTable('friends')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE');
-   });
 };
 
 exports.down = function(knex, Promise) {
   return knex.schema
-  .dropTableIfExists('friendships')
-  .dropTableIfExists('friends')
+  .dropTableIfExists('following')
   .dropTableIfExists('users');
 };
