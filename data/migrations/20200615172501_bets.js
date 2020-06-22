@@ -1,37 +1,52 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema
-  .createTable('bet', tbl => {
+  .createTable('bet_table', tbl => {
       tbl.increments().primary();
+      tbl.integer('user_1_id').references('id').inTable('users');
+      tbl.integer('user_2_id').references('id').inTable('users');
       tbl.string('bet_title', 255).notNullable();
-      tbl.integer('bet_amount').notNullable();
-      tbl.boolean('bet_likes');
-      tbl.string('bet_comments',255);
-      tbl.date('bet_ends');
+      tbl.integer('bet_amount');
+      tbl.timestamp('bet_created');
+      tbl.date('bet_Expires');
+      tbl.boolean('bet_Type');
+      tbl.boolean('bet_Accepted');
   })
-  .createTable('user_bets', tbl=>{
-      tbl.integer('user_id')
-      .unsigned()
-      .references('id')
-      .inTable('users')
-      .onUpdate('CASCADE')
-      .onDelete('CASCADE');
-      tbl.integer('friend_id')
-      .unsigned().notNullable()
-      .references('id').inTable('friends')
-      .onUpdate('CASCADE')
-      .onDelete('CASCADE');
+  .createTable('likes', tbl=>{
+      tbl.increments();
       tbl.integer('bet_id')
       .unsigned()
       .references('id')
-      .inTable('bet')
+      .inTable('bet_table')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
-  });
+      tbl.integer('user_id')
+      .unsigned()
+      .references('id').inTable('users')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+  })
+  .createTable('comments', tbl =>{
+    tbl.increments();
+    tbl.integer('bet_id')
+    .unsigned()
+    .references('id')
+    .inTable('bet_table')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE');
+    tbl.integer('commentor_id').unsigned()
+    .references('id')
+    .inTable('users')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE');
+    tbl.string('comment_text', 255);
+    tbl.timestamp('comment_timeStamp');
+  })
 };
 
 exports.down = function(knex, Promise) {
     return knex.schema
-    .dropTableIfExists('user_bets')
-    .dropTableIfExists('bet');
+    .dropTableIfExists('comments')
+    .dropTableIfExists('likes')
+    .dropTableIfExists('bet_table');
 };
