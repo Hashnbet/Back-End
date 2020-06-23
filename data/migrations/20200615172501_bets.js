@@ -34,7 +34,8 @@ exports.up = function(knex, Promise) {
     .inTable('bet_table')
     .onUpdate('CASCADE')
     .onDelete('CASCADE');
-    tbl.integer('commentor_id').unsigned()
+    tbl.integer('commentor_id')
+    .unsigned()
     .references('id')
     .inTable('users')
     .onUpdate('CASCADE')

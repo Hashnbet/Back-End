@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     user.string('username', 128).unique().notNullable();
     user.string('password', 128).notNullable();
     user.string('name', 255).notNullable();
-    user.integer('money_bankRoll');
+    user.integer('money_bankRoll');//Float
     user.integer('kudos_bankRoll');
     user.string('bet_Type', 128).notNullable();
    })
