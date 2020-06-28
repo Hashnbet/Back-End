@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
       tbl.integer('user_2_id').references('id').inTable('users');
       tbl.string('bet_title', 255).notNullable();
       tbl.integer('bet_amount');
-      tbl.timestamp('bet_created');
+      tbl.timestamp('bet_created').defaultTo(knex.fn.now());
       tbl.date('bet_Expires');
       tbl.boolean('bet_Type');
       tbl.boolean('bet_Accepted');
