@@ -4,6 +4,8 @@ module.exports = {
     add,
     find, 
     findById,
+    getFollowers,
+    getFollowing,
     remove,
     update
 };
@@ -28,7 +30,6 @@ function find() {
         'money_bankRoll',
         'kudos_bankRoll',
         'bet_Type')
-
 }
 
 function findById(id) {
@@ -38,8 +39,6 @@ function findById(id) {
         'username',
         'password',
         'name',
-        'followers',
-        'following',
         'money_bankRoll',
         'kudos_bankRoll',
         'bet_Type')
@@ -47,16 +46,23 @@ function findById(id) {
     .first();
 }
 
+function getFollowers(user_id) {
+    return db('followers').select('users.id', 'users.name').join('users', 'users.id', 'followers.follower_id').where({ user_id })
+}
+
+function getFollowing(follower_id) {
+    return db('followers').select('users.id', 'users.name').join('users', 'users.id', 'followers.user_id').where({ follower_id })
+}
+
 function remove(id) {
     return db('users')
-      .where({ id })
-      .del();
-  }
-  
-  function update(changes, id) {
+        .where({ id })
+        .del();
+}
+
+function update(changes, id) {
     return db('users')
-      .where({ id })
-      .update(changes)
-      .then(count => findById(id));
-  }
-  
+        .where({ id })
+        .update(changes)
+        .then(count => findById(id));
+}
